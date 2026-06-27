@@ -1,5 +1,5 @@
 ---
-title: "Deploy via API: Integrate Canelle AI Anywhere"
+title: "Deploy via REST API: Integrate Your Canelle AI Agent"
 sidebarTitle: "API Deployment"
 description: "Use the Canelle AI REST API to build custom chat UIs, pipe agent responses into your own workflows, or integrate with any application."
 ---
@@ -71,6 +71,7 @@ console.log(data.answer);
 ```json
 {
   "id": "msg_01HX9Z2K3M",
+  "conversation_id": "conv_01HX9Z2K3M",
   "answer": "Our refund policy allows returns within 30 days of purchase. To request a refund, email billing@yourcompany.com with your order number.",
   "sources": [
     {
@@ -79,11 +80,12 @@ console.log(data.answer);
     }
   ],
   "credits_used": 1,
-  "credits_remaining": 4842
+  "credits_remaining": 4842,
+  "fallback": false
 }
 ```
 
-The `sources` array lists the knowledge base documents the agent drew from to generate the answer — useful for building citation UI or for auditing the agent's reasoning.
+The `sources` array lists the knowledge base documents the agent drew from to generate the answer — useful for building citation UI or for auditing the agent's reasoning. The `fallback` field is `true` when the agent could not find a confident answer in your knowledge base and fell back to a generic response.
 
 ## Maintain conversation context
 

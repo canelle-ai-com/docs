@@ -1,7 +1,7 @@
 ---
-title: "Canelle AI REST API: Full Reference Overview"
+title: "Canelle AI REST API Reference: All Endpoints & Errors"
 sidebarTitle: "Overview"
-description: "The Canelle AI REST API lets you chat with your agent, manage knowledge sources, and retrieve conversations programmatically. Base URL: https://api.canelleai.com/v1."
+description: "The Canelle AI REST API lets you send messages, manage knowledge sources, and retrieve conversations. Base URL: https://api.canelleai.com/v1."
 ---
 
 The Canelle AI REST API gives you programmatic access to everything your agent can do — send messages and receive grounded answers, add or remove documents from your knowledge base, and retrieve full conversation transcripts for reporting or analytics. All functionality is available over HTTPS using standard JSON requests and responses, making it straightforward to integrate Canelle AI into any application or workflow.
@@ -30,7 +30,7 @@ Send request bodies as JSON and include the `Content-Type: application/json` hea
 curl -X POST https://api.canelleai.com/v1/chat \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{ "project_id": "proj_xxx", "message": "Hello" }'
+  -d '{ "project_id": "proj_01HX9Z2K3M", "message": "Hello" }'
 ```
 
 ## Response Format

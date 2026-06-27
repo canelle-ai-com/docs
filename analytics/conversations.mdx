@@ -14,20 +14,21 @@ Navigate to your project dashboard and select the **Analytics** tab in the top n
 
 At the top of the Analytics page, four stat cards give you an at-a-glance summary of agent performance for the selected time period.
 
-<CardGroup cols={2}>
-  <Card title="Total Conversations" icon="comments">
-    The number of unique conversation sessions started by users. Each time a new user (or a returning user) begins a fresh session, it counts as one conversation.
-  </Card>
-  <Card title="Total Messages" icon="message">
-    The total number of individual messages sent by users. Every user message consumes one AI credit, so this figure directly maps to your credit consumption.
-  </Card>
-  <Card title="Resolution Rate" icon="circle-check">
-    The percentage of conversations in which your agent provided a direct answer rather than triggering the fallback message. A higher resolution rate indicates stronger knowledge base coverage.
-  </Card>
-  <Card title="Avg. Response Sentiment" icon="face-smile">
-    The average sentiment score across all conversations in the selected period. Scores range from **-1.0** (very negative) to **+1.0** (very positive), giving you a quick read on how users feel about their interactions.
-  </Card>
-</CardGroup>
+<Accordion title="Total Conversations">
+  The number of unique conversation sessions started by users. Each time a new user (or a returning user) begins a fresh session, it counts as one conversation.
+</Accordion>
+
+<Accordion title="Total Messages">
+  The total number of individual messages sent by users. Every user message consumes one AI credit, so this figure directly maps to your credit consumption.
+</Accordion>
+
+<Accordion title="Resolution Rate">
+  The percentage of conversations in which your agent provided a direct answer rather than triggering the fallback message. A higher resolution rate indicates stronger knowledge base coverage.
+</Accordion>
+
+<Accordion title="Avg. Response Sentiment">
+  The average sentiment score across all conversations in the selected period. Scores range from **-1.0** (very negative) to **+1.0** (very positive), giving you a quick read on how users feel about their interactions.
+</Accordion>
 
 ## Conversation List
 

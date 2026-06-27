@@ -1,5 +1,5 @@
 ---
-title: "Account Settings: Profile, Team, and API Keys"
+title: "Account Settings: Profile, Team Members, and API Keys"
 sidebarTitle: "Account"
 description: "Manage your Canelle AI profile, invite team members to collaborate on projects, and generate or revoke API keys from your account settings."
 ---
@@ -46,17 +46,17 @@ Navigate to **Settings → Team** to invite collaborators and manage their acces
 
 ### Roles and Permissions
 
-<CardGroup cols={3}>
-  <Card title="Admin" icon="shield">
-    Full access to all projects, agent settings, knowledge bases, and billing. Admins can also invite and remove other members.
-  </Card>
-  <Card title="Editor" icon="pen-to-square">
-    Can create and edit knowledge bases and configure agent settings across all projects. Editors cannot view or change billing information.
-  </Card>
-  <Card title="Viewer" icon="eye">
-    Read-only access to conversation history and analytics. Viewers cannot make any changes to projects or settings.
-  </Card>
-</CardGroup>
+<Accordion title="Admin">
+  Full access to all projects, agent settings, knowledge bases, and billing. Admins can also invite and remove other members.
+</Accordion>
+
+<Accordion title="Editor">
+  Can create and edit knowledge bases and configure agent settings across all projects. Editors cannot view or change billing information.
+</Accordion>
+
+<Accordion title="Viewer">
+  Read-only access to conversation history and analytics. Viewers cannot make any changes to projects or settings.
+</Accordion>
 
 ### Removing a Member
 
