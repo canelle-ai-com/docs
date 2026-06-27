@@ -1,0 +1,65 @@
+---
+title: "Test Your Agent Before Going Live"
+sidebarTitle: "Testing"
+description: "Use the built-in agent preview to test responses, verify knowledge coverage, and spot gaps before deploying your Canelle AI agent to users."
+---
+
+Before deploying your agent, test it to make sure it answers accurately and handles edge cases gracefully. A few minutes of structured testing catches gaps in your knowledge base and reveals configuration issues that are far easier to fix before your users encounter them than after.
+
+## Accessing the preview
+
+Navigate to your **Project**, select the **Agent** tab, then click **Preview**. The preview panel opens on the right side of the screen and behaves exactly like the deployed widget — it uses the same knowledge base, the same configuration settings, and the same system prompt. What you see in the preview is what your users will see.
+
+<Note>
+  Preview conversations use a separate test quota and do not count against your plan's AI credits. Test as much as you need without worrying about usage.
+</Note>
+
+## What to test
+
+Work through the following scenarios before going live. Cover the expected cases as well as the ones you hope never happen — your users will find them either way.
+
+- Ask the questions your users are most likely to ask, using the natural phrasing they'd actually type
+- Ask a question you **know is not** in your knowledge base — verify that your fallback message appears and is helpful
+- Ask follow-up questions in the same conversation to test context retention across multiple turns
+- Ask in different languages if you have **Auto-detect** enabled for response language
+- Try edge cases: vague questions, multi-part questions, and common spelling mistakes
+
+## Reading responses
+
+For each response the preview returns, evaluate it against three criteria:
+
+<Steps>
+  <Step title="Check accuracy">
+    Is the answer factually correct and grounded in content you've actually indexed? Watch for any response that sounds plausible but references something you didn't add to your knowledge base.
+  </Step>
+  <Step title="Verify source citations">
+    If source citations are enabled, click each linked source to confirm it opens the correct document and that the cited content actually supports the answer given.
+  </Step>
+  <Step title="Evaluate response style">
+    Is the level of detail appropriate for the question? If a one-sentence answer feels thin, or a long explanation feels excessive, consider adjusting the **Response style** setting in your agent configuration.
+  </Step>
+</Steps>
+
+## Improving results
+
+If the agent gives a wrong, incomplete, or irrelevant answer, the fix almost always involves your knowledge base rather than the model itself. Try the following approaches:
+
+<Accordion title="Add more content on the topic">
+  Navigate to your **Knowledge** tab and add more source material covering the subject the agent struggled with. More relevant content gives the agent more signal to work with and produces better, more consistent answers.
+</Accordion>
+
+<Accordion title="Rephrase existing content for clarity">
+  If the content exists but the agent isn't using it correctly, the phrasing may be ambiguous. Edit the source or add a text snippet that states the information more directly, using language that mirrors how users would ask the question.
+</Accordion>
+
+<Accordion title="Add a direct Q&A snippet">
+  For questions that come up frequently but are hard to answer from prose alone, add a plain-text snippet in explicit Q&A format — for example, "Q: What is your refund policy? A: We offer full refunds within 30 days of purchase." This gives the agent a precise, unambiguous source to cite.
+</Accordion>
+
+<Accordion title="Adjust the response style">
+  If answers feel too terse or too verbose for the type of questions being asked, go to **Agent → Settings** and switch between the **Concise** and **Detailed** response style options.
+</Accordion>
+
+<Tip>
+  Try rephrasing the same question multiple ways. If results vary dramatically, add more content on that topic to improve consistency.
+</Tip>

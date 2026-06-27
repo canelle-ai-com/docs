@@ -1,0 +1,89 @@
+---
+title: "Manage and Update Your Knowledge Base Content"
+sidebarTitle: "Managing Content"
+description: "Learn how to view, refresh, remove, and organize sources in your Canelle AI knowledge base to keep your agent's answers accurate and current."
+---
+
+Knowledge goes stale. A pricing page changes, a policy gets updated, a product is discontinued — and if your knowledge base doesn't reflect those changes, your agent will give your users outdated answers. This page explains how to stay on top of your sources: how to review what's indexed, keep content fresh, remove what's no longer relevant, and troubleshoot sources that fail to index.
+
+## Viewing Your Sources
+
+Open your project and click the **Knowledge Base** tab to see a full list of every source you've added. Each row in the list shows:
+
+| Column | Description |
+|---|---|
+| **Name** | The filename, URL, or snippet title |
+| **Type** | PDF, DOCX, URL, Notion, Confluence, or Text |
+| **Date Added** | When the source was first indexed |
+| **Status** | `Processing`, `Ready`, or `Error` |
+| **Size** | The amount of indexed storage the source occupies |
+
+Use the search bar at the top of the list to filter sources by name, and use the **Type** dropdown to filter by source category.
+
+## Refreshing a Source
+
+When the content at a URL changes — or when you update a Notion or Confluence page — the version in your knowledge base becomes outdated. Refreshing a source re-scrapes and re-indexes the latest content.
+
+<Steps>
+  <Step title="Find the source in the list">
+    Go to the **Knowledge Base** tab and locate the source you want to update.
+  </Step>
+  <Step title="Click the refresh icon">
+    Click the **↻ refresh** icon to the right of the source row. The status changes to **Processing** while re-indexing runs.
+  </Step>
+  <Step title="Wait for the Ready status">
+    Re-indexing takes the same amount of time as the initial index — typically 10–45 seconds depending on the source type and content length. Once the status returns to **Ready**, your agent is using the updated content.
+  </Step>
+</Steps>
+
+<Note>
+  Only URL-based sources (web pages, Notion, and Confluence) can be refreshed. To update a PDF, DOCX, or text snippet, remove the existing source and add the updated version.
+</Note>
+
+## Removing a Source
+
+<Warning>
+  Removing a source is permanent. If you delete a source and want to re-add it, you'll need to upload or paste it again. There is no undo.
+</Warning>
+
+To remove a source, click the **🗑 trash** icon next to the source in the Knowledge Base list. The content is removed from the index immediately — your agent will stop using it to answer questions as soon as the deletion is confirmed.
+
+Removing a source does not affect other sources or your agent's configuration. Only the deleted source's content is removed.
+
+## Handling Errors
+
+If a source shows an **Error** status, it means Canelle AI was unable to index the content. Hover over the **Error** badge to see a short description of the specific issue.
+
+<Accordion title="PDF or DOCX errors">
+  - **Scanned/image-based PDF:** The file does not contain selectable text. Use an OCR tool to convert the PDF to a text-based format before re-uploading.
+  - **Password-protected file:** Remove the password protection from the document, then re-upload it.
+  - **Corrupted file:** The file may be damaged. Try re-exporting it from the source application and uploading the new copy.
+</Accordion>
+
+<Accordion title="URL errors">
+  - **Page requires login:** Canelle AI cannot index pages that are behind authentication walls. Use the plain text source type to manually paste the content instead.
+  - **JavaScript rendering required:** Single-page apps or dynamically rendered pages may return empty or incomplete content. Try adding the URL to check the preview, and if the content is missing, paste the relevant text manually.
+  - **Page not found (404):** The URL may have changed or the page may have been deleted. Update the URL or remove the source.
+</Accordion>
+
+<Accordion title="Notion or Confluence errors">
+  - **Insufficient sharing permissions:** Check that the Notion page is set to **Anyone with the link can view**, or that the Confluence page is publicly accessible.
+  - **Workspace access restrictions:** Some Confluence instances are only accessible within a corporate network or VPN. Canelle AI cannot reach pages behind those restrictions.
+  - **Expired share link:** Re-generate the sharing link in Notion and add it as a new source.
+</Accordion>
+
+## Storage Limits
+
+Each plan includes a storage quota that counts the size of indexed content across all sources in all your projects.
+
+| Plan | Total Storage | Max File Size |
+|---|---|---|
+| Basic | 5 MB | 25 MB per file |
+| Professional | 25 MB | 25 MB per file |
+| Ultimate | 100 MB | 25 MB per file |
+
+<Note>
+  Storage counts the size of indexed content, not raw uploads. Text content is highly compressed after indexing, so a 10 MB PDF typically occupies significantly less than 10 MB of storage quota.
+</Note>
+
+If you approach your storage limit, remove sources that are outdated, rarely referenced, or covered by other sources. You can also upgrade your plan from **Settings** → **Billing**.

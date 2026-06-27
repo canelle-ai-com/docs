@@ -1,0 +1,98 @@
+---
+title: "Account Settings: Profile, Team, and API Keys"
+sidebarTitle: "Account"
+description: "Manage your Canelle AI profile, invite team members to collaborate on projects, and generate or revoke API keys from your account settings."
+---
+
+Account settings control your personal profile, workspace members, and API access credentials. Everything you need to manage who has access to your workspace — and how external applications connect to it — lives here.
+
+## Profile Settings
+
+Navigate to **Settings → Profile** to update your personal information and notification preferences.
+
+<Accordion title="Name and Email Address">
+  Update your display name and the email address associated with your Canelle AI account. Changes to your email address take effect after you verify the new address via a confirmation link.
+</Accordion>
+
+<Accordion title="Password">
+  Click **Change password**, enter your current password, then enter and confirm your new password. Your new password must be at least 8 characters long.
+</Accordion>
+
+<Accordion title="Notification Preferences">
+  Toggle email notifications on or off for each of the following events:
+
+  - **Low credit warnings** — receive an alert when your AI credit balance drops below a set threshold
+  - **New conversations (daily digest)** — a daily summary email listing new conversations from the previous day
+  - **Weekly analytics summary** — a weekly email with top-line metrics for all your projects
+</Accordion>
+
+## Team Management
+
+Navigate to **Settings → Team** to invite collaborators and manage their access. Team management is available on **Professional** and **Ultimate** plans.
+
+### Inviting Team Members
+
+<Steps>
+  <Step title="Open the Team settings page">
+    Go to **Settings → Team** and click **Invite member**.
+  </Step>
+  <Step title="Enter their email address">
+    Type the email address of the person you want to invite, then select a role from the dropdown.
+  </Step>
+  <Step title="Send the invitation">
+    Click **Send invite**. The invitee receives an email with a link to accept and join your workspace.
+  </Step>
+</Steps>
+
+### Roles and Permissions
+
+<CardGroup cols={3}>
+  <Card title="Admin" icon="shield">
+    Full access to all projects, agent settings, knowledge bases, and billing. Admins can also invite and remove other members.
+  </Card>
+  <Card title="Editor" icon="pen-to-square">
+    Can create and edit knowledge bases and configure agent settings across all projects. Editors cannot view or change billing information.
+  </Card>
+  <Card title="Viewer" icon="eye">
+    Read-only access to conversation history and analytics. Viewers cannot make any changes to projects or settings.
+  </Card>
+</CardGroup>
+
+### Removing a Member
+
+To remove a team member, click the **trash icon** next to their name in the member list. Their access is revoked immediately.
+
+## API Keys
+
+Navigate to **Settings → API Keys** to generate credentials for connecting external applications to your Canelle AI projects.
+
+<Steps>
+  <Step title="Generate a new key">
+    Click **Generate new API key**.
+  </Step>
+  <Step title="Name the key">
+    Give the key a descriptive name that reflects where it will be used — for example, `Production app` or `Testing`. This label helps you identify the key later.
+  </Step>
+  <Step title="Copy the key immediately">
+    Your full API key is displayed **once only**. Copy it now and store it securely (for example, in a secrets manager or a `.env` file). You cannot retrieve the full key again after closing this dialog.
+  </Step>
+  <Step title="Use the key in your application">
+    Pass the key in the `Authorization` header of every API request:
+
+    ```http
+    Authorization: Bearer YOUR_API_KEY
+    ```
+  </Step>
+</Steps>
+
+### Revoking a Key
+
+To revoke an API key, click **Revoke** next to its name in the API Keys list. Revocation is immediate — any application using that key loses access instantly.
+
+<Warning>
+  API keys grant full access to all your projects. Store them securely and never commit them to version control. If you suspect a key has been compromised, revoke it immediately and generate a replacement.
+</Warning>
+
+<Note>
+  If you lose an API key, revoke it and generate a new one. There is no way to recover the value of a key after it has been generated and the dialog closed.
+</Note>

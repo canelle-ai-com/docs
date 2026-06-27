@@ -1,0 +1,202 @@
+---
+title: "Conversations API: Retrieve Chat History"
+sidebarTitle: "Conversations"
+description: "Retrieve conversation history, individual conversation transcripts, and message-level details from your Canelle AI projects via the REST API."
+---
+
+The Conversations API lets you pull conversation history programmatically for reporting, auditing, or building custom analytics dashboards. Retrieve a paginated list of all conversations in a project, or fetch a complete transcript — including every user message, agent response, and cited source — for a specific conversation.
+
+---
+
+## GET /v1/conversations
+
+List conversations for a project, ordered by most recent first.
+
+**Endpoint**
+
+```
+GET https://api.canelleai.com/v1/conversations?project_id=proj_xxx
+```
+
+### Query Parameters
+
+<ParamField query="project_id" type="string" required>
+  The ID of the project whose conversations you want to retrieve.
+</ParamField>
+
+<ParamField query="limit" type="integer" default="20">
+  The maximum number of conversations to return per page. Accepted range: 1–100.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  A pagination cursor returned in the `next_cursor` field of a previous response. Pass this value to retrieve the next page of results.
+</ParamField>
+
+<ParamField query="since" type="string">
+  An ISO 8601 datetime string. When provided, only conversations that started after this timestamp are returned. Example: `2024-03-01T00:00:00Z`.
+</ParamField>
+
+### Example Request
+
+```bash curl
+curl "https://api.canelleai.com/v1/conversations?project_id=proj_01HX9Z2K3M&limit=20" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Example Response
+
+```json
+{
+  "conversations": [
+    {
+      "id": "conv_01HX9Z2K3M",
+      "message_count": 4,
+      "created_at": "2024-03-15T10:30:00Z",
+      "last_message_at": "2024-03-15T10:32:00Z",
+      "sentiment": 0.82,
+      "resolved": true,
+      "channel": "widget"
+    }
+  ],
+  "next_cursor": "cur_01HXA1B2C3",
+  "has_more": true
+}
+```
+
+### Response Fields
+
+<ResponseField name="conversations" type="array">
+  An array of conversation summary objects.
+
+  <Expandable title="Conversation object fields">
+    <ResponseField name="id" type="string">
+      The unique ID of the conversation. Pass this to `GET /v1/conversations/{id}` to retrieve the full transcript.
+    </ResponseField>
+    <ResponseField name="message_count" type="integer">
+      The total number of messages (user and assistant combined) in the conversation.
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      ISO 8601 timestamp of when the first message was sent.
+    </ResponseField>
+    <ResponseField name="last_message_at" type="string">
+      ISO 8601 timestamp of the most recent message in the conversation.
+    </ResponseField>
+    <ResponseField name="sentiment" type="number">
+      A sentiment score between `0.0` (most negative) and `1.0` (most positive), calculated from the conversation content.
+    </ResponseField>
+    <ResponseField name="resolved" type="boolean">
+      `true` if the conversation was marked as resolved, either automatically or by a human agent.
+    </ResponseField>
+    <ResponseField name="channel" type="string">
+      The channel through which the conversation took place, such as `widget`, `api`, or `slack`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="next_cursor" type="string">
+  A cursor you can pass as the `cursor` query parameter to retrieve the next page of results. `null` when there are no more pages.
+</ResponseField>
+
+<ResponseField name="has_more" type="boolean">
+  `true` if there are additional conversations beyond this page.
+</ResponseField>
+
+---
+
+## GET /v1/conversations/{id}
+
+Retrieve the full transcript of a single conversation, including every message, agent response, and source citations.
+
+**Endpoint**
+
+```
+GET https://api.canelleai.com/v1/conversations/{id}
+```
+
+### Path Parameters
+
+<ParamField path="id" type="string" required>
+  The ID of the conversation to retrieve. Obtain this from the list endpoint.
+</ParamField>
+
+### Example Request
+
+```bash curl
+curl https://api.canelleai.com/v1/conversations/conv_01HX9Z2K3M \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Example Response
+
+```json
+{
+  "id": "conv_01HX9Z2K3M",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is your return policy?",
+      "created_at": "2024-03-15T10:30:00Z"
+    },
+    {
+      "role": "assistant",
+      "content": "We accept returns within 30 days of purchase...",
+      "sources": [
+        {
+          "title": "Return Policy",
+          "url": "https://acme.com/returns"
+        }
+      ],
+      "created_at": "2024-03-15T10:30:02Z"
+    }
+  ],
+  "sentiment": 0.82,
+  "resolved": true,
+  "channel": "widget",
+  "created_at": "2024-03-15T10:30:00Z"
+}
+```
+
+### Response Fields
+
+<ResponseField name="id" type="string">
+  The unique ID of the conversation.
+</ResponseField>
+
+<ResponseField name="messages" type="array">
+  An ordered array of all messages in the conversation, from oldest to newest.
+
+  <Expandable title="Message object fields">
+    <ResponseField name="role" type="string">
+      Either `user` (a message sent by the end user) or `assistant` (a response generated by your agent).
+    </ResponseField>
+    <ResponseField name="content" type="string">
+      The text content of the message.
+    </ResponseField>
+    <ResponseField name="sources" type="array">
+      Present on `assistant` messages only. Lists the knowledge base sources the agent cited when generating this response. Each source has a `title` (string) and a `url` (string, or `null` for uploaded files).
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      ISO 8601 timestamp of when this message was created.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="sentiment" type="number">
+  A sentiment score for the overall conversation, between `0.0` (most negative) and `1.0` (most positive).
+</ResponseField>
+
+<ResponseField name="resolved" type="boolean">
+  `true` if the conversation has been marked as resolved.
+</ResponseField>
+
+<ResponseField name="channel" type="string">
+  The channel through which the conversation took place.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the conversation was created.
+</ResponseField>
+
+<Note>
+  Conversations are retained for 12 months. Older conversations are automatically deleted.
+</Note>

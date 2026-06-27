@@ -1,0 +1,75 @@
+---
+title: "Customize Your Agent's Branding and Appearance"
+sidebarTitle: "Customize"
+description: "Match your Canelle AI agent to your brand with custom colors, logo, avatar, and chat widget appearance settings available on Professional and Ultimate plans."
+---
+
+Canelle AI lets you match the look and feel of your agent to your brand so it feels native to your product or website. Rather than a generic chat widget, your users see something that looks like it belongs — with your colors, your logo, and your voice baked in from the first message.
+
+## Open the appearance panel
+
+Navigate to your **Project**, select the **Agent** tab, then click **Appearance** in the left sidebar of the Agent panel.
+
+## Appearance settings
+
+### Agent avatar
+
+**Agent avatar** is the image shown next to agent messages inside the chat widget. Upload a square image in PNG or JPG format with a minimum size of 128×128 px. For the sharpest result on high-density screens, use a 256×256 px or larger image.
+
+### Primary color
+
+**Primary color** sets the color applied to the chat header, send button, and user message bubbles. Enter a hex color code to match your brand palette exactly.
+
+> **Example:** `#ef7025`
+
+If you're unsure of your brand's hex code, your design system, brand guidelines, or CSS stylesheet is the best place to look.
+
+### Chat window title
+
+**Chat window title** is the heading displayed at the top of the chat widget. It defaults to your agent name, but you can set it to any short label that helps users understand what they're interacting with — for example, "Acme Support" or "Ask the Docs."
+
+### Powered by badge
+
+**Powered by badge** controls whether a small "Powered by Canelle AI" attribution badge appears in the widget footer. Toggle it off to remove the badge entirely. Badge removal is available on the **Ultimate plan** only.
+
+## Custom domain for shared links
+
+On the **Ultimate plan**, you can serve your agent's shared link from your own domain — for example, `chat.yourcompany.com` — instead of the default Canelle AI subdomain. This gives your agent a fully white-labeled URL that reinforces your brand.
+
+To set up a custom domain, [contact Canelle AI support](mailto:support@canelle.ai) with your desired domain. The support team will walk you through the DNS configuration required on your end.
+
+## System prompt customization
+
+Available on **Professional** and **Ultimate** plans, the system prompt lets you add custom instructions that guide your agent's tone, personality, and behavior. The system prompt runs before every conversation and is never shown to users directly.
+
+Use the system prompt to establish a persona, set boundaries, and handle known edge cases — like redirecting pricing questions to your sales page.
+
+<CodeGroup>
+
+```text System prompt example
+You are Aria, the friendly support assistant for Acme Corp. 
+Always be polite and concise. If a user asks about pricing, 
+direct them to https://acme.com/pricing. Never speculate 
+about information not in your knowledge base.
+```
+
+</CodeGroup>
+
+<Note>
+  Custom branding settings apply to the widget and shared link. The API always returns plain text/JSON regardless of appearance settings.
+</Note>
+
+<Warning>
+  Changes to the system prompt affect all future conversations immediately. Test your prompt in the Agent Preview before saving to production.
+</Warning>
+
+## What to do next
+
+<CardGroup cols={2}>
+  <Card title="Test Your Agent" icon="flask" href="/agent/testing">
+    Use the built-in preview to verify your branding and prompt changes before going live.
+  </Card>
+  <Card title="Manage Your Plan" icon="credit-card" href="/settings/billing">
+    Upgrade to Professional or Ultimate to unlock system prompts, badge removal, and custom domains.
+  </Card>
+</CardGroup>

@@ -1,0 +1,124 @@
+---
+title: "POST /v1/chat — Send a Message to Your Agent"
+sidebarTitle: "POST /v1/chat"
+description: "Send a user message to your Canelle AI agent and receive a grounded answer with source citations. Supports multi-turn conversations via conversation_id."
+---
+
+The `/v1/chat` endpoint is the core of the Canelle AI API. Send a user message and receive an answer that your agent generates from the documents and URLs in your knowledge base. Each response includes the sources the agent cited, so you can display references alongside the answer or build trust flows for your users.
+
+## Endpoint
+
+```
+POST https://api.canelleai.com/v1/chat
+```
+
+## Request Body
+
+<ParamField body="project_id" type="string" required>
+  The ID of the project (agent) to send the message to. Find this value in your project's **Settings** page.
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  The user's message or question. Maximum 2,000 characters.
+</ParamField>
+
+<ParamField body="conversation_id" type="string">
+  Pass the `conversation_id` from a previous response to continue an existing conversation with full context. Omit this field to start a new conversation.
+</ParamField>
+
+<ParamField body="user_id" type="string">
+  An identifier for the end user sending the message. Use this to group conversations by user in your analytics dashboard. This value does not need to match any Canelle AI account — it can be any string meaningful to your application, such as a database ID or email address.
+</ParamField>
+
+## Example Request
+
+```bash curl
+curl -X POST https://api.canelleai.com/v1/chat \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "proj_01HX9Z2K3M",
+    "message": "What is your return policy?"
+  }'
+```
+
+## Response Fields
+
+<ResponseField name="id" type="string">
+  The unique ID of this message.
+</ResponseField>
+
+<ResponseField name="conversation_id" type="string">
+  The ID of the conversation this message belongs to. Pass this value as `conversation_id` in your next request to maintain context across multiple turns.
+</ResponseField>
+
+<ResponseField name="answer" type="string">
+  The agent's response, generated from your knowledge base.
+</ResponseField>
+
+<ResponseField name="sources" type="array">
+  The list of knowledge sources the agent referenced to generate the answer.
+
+  <Expandable title="Source object fields">
+    <ResponseField name="title" type="string">
+      The human-readable title of the source document.
+    </ResponseField>
+    <ResponseField name="url" type="string">
+      The URL of the source. This field is `null` for documents that were uploaded as files or added as plain text rather than scraped from a URL.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="credits_used" type="integer">
+  The number of AI credits consumed by this request.
+</ResponseField>
+
+<ResponseField name="credits_remaining" type="integer">
+  The number of AI credits remaining on your plan for the current billing period.
+</ResponseField>
+
+<ResponseField name="fallback" type="boolean">
+  `true` if the agent could not find relevant information in your knowledge base and fell back to the default fallback message configured in your project settings.
+</ResponseField>
+
+## Example Response
+
+```json
+{
+  "id": "msg_01HX9Z2K3M",
+  "conversation_id": "conv_01HX9Z2K3M",
+  "answer": "We accept returns within 30 days of purchase. Items must be in original condition. To start a return, email returns@acme.com with your order number.",
+  "sources": [
+    {
+      "title": "Return & Refund Policy",
+      "url": "https://acme.com/returns"
+    }
+  ],
+  "credits_used": 1,
+  "credits_remaining": 4999,
+  "fallback": false
+}
+```
+
+## Multi-Turn Conversations
+
+To continue a conversation, pass the `conversation_id` from the previous response in your next request. The agent uses the full conversation history as context when generating its answer.
+
+```bash curl
+curl -X POST https://api.canelleai.com/v1/chat \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "proj_01HX9Z2K3M",
+    "conversation_id": "conv_01HX9Z2K3M",
+    "message": "What about exchanges instead of refunds?"
+  }'
+```
+
+<Tip>
+  Store the `conversation_id` on the client side — for example, in `localStorage` or your session — and include it on every follow-up message to give your users a seamless, context-aware chat experience.
+</Tip>
+
+<Note>
+  Conversations expire after 30 days of inactivity. Passing an expired `conversation_id` starts a new conversation.
+</Note>

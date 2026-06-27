@@ -1,0 +1,91 @@
+---
+title: "Conversation Analytics: Understand How Users Engage"
+sidebarTitle: "Conversations"
+description: "Review conversation history, sentiment scores, unanswered questions, and usage trends to continuously improve your Canelle AI agent."
+---
+
+The Analytics tab shows you how users are interacting with your agent — what they're asking, whether they're satisfied, and where the knowledge base has gaps. Use these insights to refine your content, close coverage gaps, and improve resolution rates over time.
+
+## Accessing Analytics
+
+Navigate to your project dashboard and select the **Analytics** tab in the top navigation bar.
+
+## Overview Metrics
+
+At the top of the Analytics page, four stat cards give you an at-a-glance summary of agent performance for the selected time period.
+
+<CardGroup cols={2}>
+  <Card title="Total Conversations" icon="comments">
+    The number of unique conversation sessions started by users. Each time a new user (or a returning user) begins a fresh session, it counts as one conversation.
+  </Card>
+  <Card title="Total Messages" icon="message">
+    The total number of individual messages sent by users. Every user message consumes one AI credit, so this figure directly maps to your credit consumption.
+  </Card>
+  <Card title="Resolution Rate" icon="circle-check">
+    The percentage of conversations in which your agent provided a direct answer rather than triggering the fallback message. A higher resolution rate indicates stronger knowledge base coverage.
+  </Card>
+  <Card title="Avg. Response Sentiment" icon="face-smile">
+    The average sentiment score across all conversations in the selected period. Scores range from **-1.0** (very negative) to **+1.0** (very positive), giving you a quick read on how users feel about their interactions.
+  </Card>
+</CardGroup>
+
+## Conversation List
+
+Below the overview cards, a full table lists every conversation recorded in the selected time period.
+
+| Column | Description |
+|---|---|
+| **Date** | Timestamp of the first message in the session |
+| **First Message** | A short preview of the user's opening question |
+| **Messages** | Total number of user messages in the session |
+| **Sentiment** | Emoji indicator of the session's overall sentiment score |
+| **Channel** | Where the conversation took place — Widget, Shared Link, Slack, or API |
+
+Click any row to open the full conversation transcript, including every turn, your agent's responses, and any sources it cited.
+
+## Unanswered Questions
+
+<Steps>
+  <Step title="Open the Unanswered Questions tab">
+    Select the **Unanswered Questions** tab next to the Conversations tab. This view lists every question where your agent fell back to the fallback message instead of providing a direct answer.
+  </Step>
+  <Step title="Review gaps in your knowledge base">
+    Scan the list to identify recurring themes or high-frequency questions that your agent currently cannot answer. These represent the highest-impact opportunities to improve resolution rate.
+  </Step>
+  <Step title="Add content directly from the list">
+    Click **Add to knowledge base** next to any question. Canelle AI creates a new text snippet pre-filled with that question as the title, ready for you to write a direct answer.
+  </Step>
+</Steps>
+
+## Time Range Filter
+
+Use the date picker in the top-right corner of the Analytics page to change the reporting window.
+
+<Tabs>
+  <Tab title="Preset Ranges">
+    Choose from **Last 7 days**, **Last 30 days**, or **Last 90 days** for instant one-click filtering.
+  </Tab>
+  <Tab title="Custom Range">
+    Select **Custom range** from the date picker, then choose a start and end date to analyse any specific period in your conversation history.
+  </Tab>
+</Tabs>
+
+## Exporting Data
+
+On **Professional** and **Ultimate** plans, you can download your full conversation log for external analysis or record-keeping.
+
+<Steps>
+  <Step title="Open Analytics">
+    Navigate to your project → **Analytics**.
+  </Step>
+  <Step title="Apply your desired time range">
+    Set the date picker to the period you want to export.
+  </Step>
+  <Step title="Click Export CSV">
+    Click the **Export CSV** button in the top-right corner. Your browser downloads a `.csv` file containing every conversation, message, sentiment score, and channel for the selected period.
+  </Step>
+</Steps>
+
+<Tip>
+  Review unanswered questions weekly and add content for the top 5 gaps. Even a short text snippet that directly answers a frequently asked but unanswered question can dramatically improve your resolution rate.
+</Tip>

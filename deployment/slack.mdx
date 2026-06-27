@@ -1,0 +1,78 @@
+---
+title: "Deploy Your Canelle AI Agent to Slack"
+sidebarTitle: "Slack"
+description: "Connect your Canelle AI knowledge agent to Slack so your team can ask questions directly in channels using a slash command."
+---
+
+The Slack integration lets your team query your knowledge agent without leaving Slack. Ask questions with a slash command and get answers posted back to the channel — keeping your team's workflow uninterrupted and your knowledge base just one command away.
+
+<Warning>
+  Slack integration is available on **Professional** and **Ultimate** plans. Upgrade your plan in **Settings → Billing** if you don't see the Slack option under Deploy.
+</Warning>
+
+## Requirements
+
+Before you begin, confirm you have the following:
+
+- A **Slack workspace admin** account — you need permission to install third-party apps into your workspace.
+- A Canelle AI project on the **Professional or Ultimate** plan.
+
+## Connect Canelle AI to Slack
+
+<Steps>
+  <Step title="Open the Slack integration settings">
+    In your project dashboard, navigate to **Deploy → Slack**.
+  </Step>
+  <Step title="Click Connect to Slack">
+    Click the **Connect to Slack** button. You'll be redirected to Slack's OAuth authorization page.
+  </Step>
+  <Step title="Authorize the Canelle AI app">
+    Review the permissions the app requests, then click **Allow**. These permissions let the app read slash command invocations and post responses. Slack will redirect you back to your Canelle AI dashboard when authorization is complete.
+  </Step>
+  <Step title="Choose which channels to enable">
+    Select the specific channels where the agent should respond, or choose **All channels** to make it available workspace-wide.
+  </Step>
+  <Step title="Complete the installation">
+    Click **Install**. The Canelle AI app is now active in your Slack workspace.
+  </Step>
+</Steps>
+
+## Using the agent in Slack
+
+Once installed, any team member can query your agent using the `/canelle` slash command:
+
+```
+/canelle ask How do I reset my password?
+```
+
+The agent processes the question against your knowledge base and replies in a **threaded message** attached to your slash command — keeping the channel uncluttered while making the answer visible to everyone.
+
+<Tabs>
+  <Tab title="Slash command in a channel">
+    Type the `/canelle ask` command followed by your question in any enabled channel. The response appears as a thread on your message.
+
+    ```
+    /canelle ask What are the steps to onboard a new employee?
+    ```
+  </Tab>
+  <Tab title="Direct message">
+    Users can also open a **direct message with the Canelle AI app** for private, one-on-one questions that don't need to be visible to the rest of the channel.
+
+    Search for **Canelle AI** in Slack's direct message search, then type your question naturally — no slash command needed in DMs.
+  </Tab>
+</Tabs>
+
+## Manage the integration
+
+<CardGroup cols={2}>
+  <Card title="Disconnect Slack" icon="plug-circle-xmark">
+    Go to **Deploy → Slack → Disconnect** to remove the Canelle AI app from your workspace. The slash command will stop responding immediately.
+  </Card>
+  <Card title="Change channel access" icon="sliders">
+    Return to **Deploy → Slack** at any time to add or remove channels, or switch between specific channels and all-channels mode.
+  </Card>
+</CardGroup>
+
+<Note>
+  Each Slack message sent to your agent consumes AI credits from your plan. Monitor your credit usage in **Settings → Usage**. You'll receive an email alert when your credits fall below your configured threshold.
+</Note>

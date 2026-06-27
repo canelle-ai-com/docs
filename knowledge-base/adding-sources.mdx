@@ -1,0 +1,117 @@
+---
+title: "Add Knowledge Sources: PDFs, URLs, Notion, and More"
+sidebarTitle: "Adding Sources"
+description: "Step-by-step instructions for adding PDFs, web URLs, Notion pages, Confluence spaces, and plain text to your Canelle AI knowledge base."
+---
+
+Every source you add to your knowledge base becomes part of what your Canelle AI agent knows. Whether your content lives in PDFs, published web pages, a Notion workspace, Confluence, or just a block of text, you can get it into your knowledge base in minutes. Follow the steps below for whichever source type applies to you.
+
+<Tabs>
+  <Tab title="PDF & DOCX">
+    <Steps>
+      <Step title="Open the Knowledge Base tab">
+        Navigate to your project, then click the **Knowledge Base** tab in the top navigation.
+      </Step>
+      <Step title="Click Upload files">
+        Click the **Upload files** button in the upper-right corner of the sources list.
+      </Step>
+      <Step title="Select your files">
+        Drag and drop your PDF or DOCX files into the upload area, or click **Browse** to select them from your file system. You can upload multiple files at once. Each file must be **25 MB or smaller**.
+      </Step>
+      <Step title="Wait for indexing to complete">
+        Each file will show a **Processing** status while Canelle AI chunks and embeds the content. Once it changes to **Ready** (typically 10–30 seconds), your agent can use it to answer questions.
+      </Step>
+    </Steps>
+
+    <Note>
+      PDFs that consist entirely of scanned images are not supported — the indexing pipeline requires selectable text. If your PDF was created by scanning a physical document, use an OCR tool to convert it to text-based PDF before uploading.
+    </Note>
+  </Tab>
+
+  <Tab title="Web URL">
+    <Steps>
+      <Step title="Open the URLs panel">
+        Navigate to your project → **Knowledge Base** tab, then select **URLs** from the source-type menu.
+      </Step>
+      <Step title="Paste the full URL">
+        Enter the complete URL of the page you want to index. The URL must begin with `https://`.
+      </Step>
+      <Step title="Click Add URL">
+        Click **Add URL**. Canelle AI immediately begins scraping the page, extracting its text content, headings, and structure.
+      </Step>
+      <Step title="Confirm the source is ready">
+        Watch for the status to change from **Processing** to **Ready**. Once ready, click the source name to preview the indexed content and confirm it looks correct.
+      </Step>
+    </Steps>
+
+    <Note>
+      Pages that require JavaScript to render their content (such as single-page apps) may not be fully indexed. Add the URL and check the content preview — if the indexed text looks incomplete or empty, the page may not be compatible with static scraping.
+    </Note>
+  </Tab>
+
+  <Tab title="Notion">
+    <Steps>
+      <Step title="Copy the Notion page link">
+        Open the Notion page you want to add. Click **Share** in the top-right corner, then click **Copy link**.
+      </Step>
+      <Step title="Set the page to public view">
+        In the same Share menu, make sure sharing is set to **Anyone with the link can view**. Canelle AI must be able to read the page without authentication.
+      </Step>
+      <Step title="Add the URL in Canelle AI">
+        In your Canelle AI project, go to **Knowledge Base** → **URLs**, paste the Notion URL, and click **Add URL**.
+      </Step>
+      <Step title="Wait for processing">
+        Canelle AI automatically detects that the URL is a Notion page and applies Notion-specific parsing to preserve the structure of your content. The source will show **Ready** in 10–30 seconds.
+      </Step>
+    </Steps>
+
+    <Tip>
+      If your Notion page contains nested sub-pages, you'll need to add each sub-page as a separate URL. Canelle AI indexes the page you link to — it does not recursively crawl child pages.
+    </Tip>
+  </Tab>
+
+  <Tab title="Confluence">
+    <Steps>
+      <Step title="Open the Confluence page">
+        Navigate to the Confluence page you want to index in your browser.
+      </Step>
+      <Step title="Copy the page URL">
+        Copy the full URL from your browser's address bar.
+      </Step>
+      <Step title="Check access permissions">
+        Confirm that the page is either publicly accessible or that your Confluence workspace allows access from external services. If your workspace is behind a VPN or SSO wall, the page cannot be indexed.
+      </Step>
+      <Step title="Add the URL in Canelle AI">
+        In your Canelle AI project, go to **Knowledge Base** → **URLs**, paste the Confluence page URL, and click **Add URL**. Canelle AI detects the Confluence format and parses it accordingly.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Plain Text">
+    <Steps>
+      <Step title="Open the Text panel">
+        Go to **Knowledge Base** → **Text** in your Canelle AI project.
+      </Step>
+      <Step title="Click Add text snippet">
+        Click the **Add text snippet** button to open the text editor.
+      </Step>
+      <Step title="Enter your content">
+        Type or paste your content directly into the editor. Plain text snippets are ideal for FAQs, policy statements, product descriptions, or any content that doesn't live in a file or URL.
+      </Step>
+      <Step title="Add a descriptive title">
+        Give the snippet a clear, descriptive title — for example, `Shipping Policy` or `Onboarding FAQ` — so you can identify and manage it later.
+      </Step>
+      <Step title="Save the snippet">
+        Click **Save**. The snippet is indexed immediately and is typically ready in 5–10 seconds.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<Note>
+  All sources are re-indexed automatically when you refresh them from the Knowledge Base tab. Refreshing a source picks up any changes to the original content since it was first added.
+</Note>
+
+<Tip>
+  For documentation sites with many pages, add the most-visited or most-question-generating pages first. You don't need every single page — prioritize quality over quantity. A focused, relevant knowledge base consistently outperforms a large, unfocused one.
+</Tip>

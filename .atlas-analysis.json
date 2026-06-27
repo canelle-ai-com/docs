@@ -1,13 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
+  "projectType": "saas",
+  "projectName": "Canelle AI",
+  "projectDescription": "Canelle AI is a knowledge agent platform that lets you build AI-powered assistants trained on your own content, then deploy them anywhere your customers and teams need answers.",
   "theme": "almond",
-  "name": "Canelle AI",
-  "colors": {
-    "primary": "#ef7025",
-    "light": "#eec9bc",
-    "dark": "#4fa1ab"
-  },
-  "favicon": "/favicon.svg",
+  "primaryColor": "#ef7025",
+  "lightColor": "#eec9bc",
+  "darkColor": "#4fa1ab",
   "navigation": {
     "tabs": [
       {
@@ -78,20 +76,20 @@
       }
     ]
   },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:support@canelleai.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Get Started",
-      "href": "https://app.canelleai.com"
-    }
-  },
-  "footer": {
-    "socials": {}
-  }
+  "keyFeatures": [
+    "Build AI agents from your own documents, URLs, PDFs, and notes",
+    "Zero hallucinations — answers grounded strictly in your indexed content",
+    "Deploy via website widget, shared link, Slack, or REST API",
+    "Conversation analytics with summaries and sentiment scoring",
+    "Custom branding, tone, and language support",
+    "Full REST API for programmatic control"
+  ],
+  "publicApiSurface": [
+    "POST /v1/chat — send a message and receive an AI response",
+    "POST /v1/documents — upload or add a knowledge source",
+    "GET /v1/documents — list all indexed knowledge sources",
+    "DELETE /v1/documents/{id} — remove a knowledge source",
+    "GET /v1/conversations — list conversation history",
+    "GET /v1/conversations/{id} — retrieve a single conversation"
+  ]
 }

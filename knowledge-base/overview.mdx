@@ -1,0 +1,65 @@
+---
+title: "Knowledge Base: How Your Agent Learns from Content"
+sidebarTitle: "Overview"
+description: "The knowledge base is the content your Canelle AI agent draws on to answer questions. Learn how indexing works and what sources are supported."
+---
+
+The knowledge base is the heart of every Canelle AI project. It's the collection of content your agent reads, understands, and draws on when answering your users' questions — so the quality and relevance of what you add directly determines how accurate and useful your agent becomes. Think of it as your agent's long-term memory: the richer and more targeted it is, the better your agent performs.
+
+## How Indexing Works
+
+When you add a source, Canelle AI processes it through a three-step pipeline:
+
+<Steps>
+  <Step title="Chunking">
+    Canelle AI splits your content into small, overlapping segments called chunks. Each chunk represents a coherent piece of information — a paragraph, a section, or a logical unit of text.
+  </Step>
+  <Step title="Embedding">
+    Each chunk is converted into a vector embedding — a numerical representation that captures the meaning of the text. This is what enables semantic search: your agent understands intent, not just keywords.
+  </Step>
+  <Step title="Storage & Retrieval">
+    The embeddings are stored in a vector database. When a user asks a question, Canelle AI retrieves the most semantically relevant chunks and passes them to the AI model to generate a grounded, accurate answer.
+  </Step>
+</Steps>
+
+## Supported Source Types
+
+Canelle AI supports a range of content sources to fit how your team already works. Each source type is processed slightly differently, and indexing times vary based on content length and complexity.
+
+| Source Type | Best For | Processing Time |
+|---|---|---|
+| PDF & DOCX | Documentation, reports, guides | 10–30 seconds |
+| URLs | Web pages, articles, online docs | 15–45 seconds |
+| Notion pages | Team wikis, internal docs | 10–30 seconds |
+| Confluence pages | Technical documentation | 10–30 seconds |
+| Plain text | Notes, FAQs, custom content | 5–10 seconds |
+| Slack *(coming soon)* | Team conversations | — |
+
+## Tips for a High-Quality Knowledge Base
+
+<Tip>
+  Getting the most out of your knowledge base comes down to what you put in it:
+
+  - **Add content your users actually ask about.** Start with your most common questions and work outward — don't just bulk-upload everything.
+  - **Use descriptive filenames for PDFs.** A file named `return-policy-2024.pdf` is easier to manage and debug than `document_final_v3.pdf`.
+  - **Avoid duplicate content.** If the same information appears in multiple sources, it dilutes answer quality and may cause your agent to repeat itself or give inconsistent responses. Keep one authoritative source per topic.
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Adding Sources"
+    icon="circle-plus"
+    href="/knowledge-base/adding-sources"
+  >
+    Step-by-step instructions for uploading PDFs, adding URLs, connecting Notion and Confluence pages, and entering plain text.
+  </Card>
+  <Card
+    title="Managing Content"
+    icon="sliders"
+    href="/knowledge-base/managing-content"
+  >
+    Learn how to view, refresh, remove, and troubleshoot sources to keep your agent's knowledge accurate and up to date.
+  </Card>
+</CardGroup>

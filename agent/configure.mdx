@@ -1,0 +1,57 @@
+---
+title: "Configure Your Canelle AI Agent Behavior and Settings"
+sidebarTitle: "Configure"
+description: "Set your agent's name, greeting, language, response style, and fallback behavior so it behaves exactly how you want for your users."
+---
+
+After adding knowledge sources, configuring your agent determines how it behaves in conversations — from the first message a user sees to what happens when your agent reaches the limits of its knowledge. Taking a few minutes to tune these settings ensures your agent feels intentional and on-brand rather than out-of-the-box generic.
+
+## Open the settings panel
+
+Navigate to your **Project**, select the **Agent** tab, then click **Settings** in the left sidebar of the Agent panel. All configuration options described below live on this page.
+
+## Configuration options
+
+### Agent name
+
+**Agent name** is the name displayed to users in the chat widget and shared link. It defaults to your project name, but you should set it to whatever your users will recognize — for example, the name of a persona you've created for your product.
+
+### Welcome message
+
+**Welcome message** is the first message users see when they open the chat widget. A specific, helpful welcome message sets expectations and invites engagement. Avoid generic greetings like "Hello! How can I help?" and instead be explicit about what the agent can do.
+
+> **Example:** "Hi! I'm Aria, the Acme support bot. Ask me anything about our products."
+
+### Response language
+
+**Response language** controls the language your agent uses when composing answers. Choose from two modes:
+
+- **Auto-detect** — the agent matches the language of the user's message. This is the best choice for multilingual audiences.
+- **Fixed language** — the agent always responds in the language you select, regardless of what language the user writes in. Supported fixed languages include English, French, Spanish, German, Portuguese, and more.
+
+### Response style
+
+**Response style** lets you choose between two answer formats:
+
+- **Concise** — short, direct answers that get to the point immediately. Best suited for support FAQs and quick-reference bots where users need a fast answer.
+- **Detailed** — full explanations with supporting context. Best suited for documentation assistants and technical guides where depth matters.
+
+You can change this setting at any time, so experiment to find what works best for your audience.
+
+### Fallback message
+
+**Fallback message** is what your agent says when it cannot find a relevant answer in your knowledge base. A good fallback message acknowledges the gap and immediately offers the user a next step — don't leave them stranded.
+
+> **Example:** "I don't have information on that. Please contact support@yourcompany.com."
+
+### Source citations
+
+**Source citations** is a toggle that, when enabled, appends a "Sources" section to each agent response. Each source links back to the indexed document your agent used to construct the answer. Enabling citations helps users verify information and builds trust, especially in technical or compliance-sensitive contexts.
+
+## Save your settings
+
+Click **Save settings** when you're done. Changes take effect immediately across all deployment channels — the widget, shared link, Slack integration, and REST API all reflect the updated configuration without any redeployment step.
+
+<Tip>
+  A specific fallback message with a contact email or support link significantly improves user satisfaction when the agent can't answer. Generic fallbacks like "I don't know" leave users with nowhere to go.
+</Tip>

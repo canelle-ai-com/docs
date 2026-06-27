@@ -1,0 +1,87 @@
+---
+title: "Canelle AI REST API: Full Reference Overview"
+sidebarTitle: "Overview"
+description: "The Canelle AI REST API lets you chat with your agent, manage knowledge sources, and retrieve conversations programmatically. Base URL: https://api.canelleai.com/v1."
+---
+
+The Canelle AI REST API gives you programmatic access to everything your agent can do — send messages and receive grounded answers, add or remove documents from your knowledge base, and retrieve full conversation transcripts for reporting or analytics. All functionality is available over HTTPS using standard JSON requests and responses, making it straightforward to integrate Canelle AI into any application or workflow.
+
+## Base URL
+
+All API endpoints are served from the following base URL:
+
+```
+https://api.canelleai.com/v1
+```
+
+## Authentication
+
+Every request must include a valid API key passed as a Bearer token in the `Authorization` header. See the [Authentication guide](/api-reference/authentication) for instructions on generating and managing your keys.
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Request Format
+
+Send request bodies as JSON and include the `Content-Type: application/json` header on all `POST` requests. `GET` and `DELETE` requests do not require a body.
+
+```bash
+curl -X POST https://api.canelleai.com/v1/chat \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "project_id": "proj_xxx", "message": "Hello" }'
+```
+
+## Response Format
+
+All responses are returned as JSON. Successful operations return an HTTP `2xx` status code. Client errors return `4xx` codes and server errors return `5xx` codes. Every error response includes a structured body so you can handle failures programmatically.
+
+### Error Response Shape
+
+```json
+{
+  "error": {
+    "code": "rate_limit_exceeded",
+    "message": "You have exceeded the rate limit. Please retry after 60 seconds.",
+    "retry_after": 60
+  }
+}
+```
+
+## Rate Limits
+
+Requests are rate-limited per API key. The default limits are **60 requests per minute** and **1,000 requests per hour**. When you exceed a limit, the API returns HTTP `429`. Check the `retry_after` field in the error body to know how many seconds to wait before retrying.
+
+## Common Error Codes
+
+| HTTP Status | Code | Meaning |
+|---|---|---|
+| 400 | `invalid_request` | Missing or malformed parameters |
+| 401 | `unauthorized` | Invalid or missing API key |
+| 403 | `forbidden` | API key does not have access to this project |
+| 404 | `not_found` | Resource does not exist |
+| 422 | `validation_error` | Request body failed validation |
+| 429 | `rate_limit_exceeded` | Too many requests |
+| 500 | `server_error` | Internal server error — retry with backoff |
+
+## Available Endpoints
+
+<CardGroup cols={2}>
+  <Card title="POST /v1/chat" icon="message-bot" href="/api-reference/chat">
+    Send a message to your agent and receive a grounded answer with source citations.
+  </Card>
+  <Card title="Documents" icon="file-lines" href="/api-reference/documents">
+    Add URLs and text content to your knowledge base, list indexed sources, and delete documents.
+  </Card>
+  <Card title="Conversations" icon="messages" href="/api-reference/conversations">
+    Retrieve conversation history, full transcripts, and message-level details for any project.
+  </Card>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Generate API keys, follow security best practices, and learn how to authenticate requests.
+  </Card>
+</CardGroup>
+
+<Note>
+  All API requests consume AI credits from your plan. Monitor your usage in **Settings → Billing**.
+</Note>

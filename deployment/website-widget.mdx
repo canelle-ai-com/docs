@@ -1,0 +1,112 @@
+---
+title: "Embed the Canelle AI Chat Widget on Your Website"
+sidebarTitle: "Website Widget"
+description: "Add a floating chat widget to your website in under 60 seconds by pasting a single script tag — no framework or build step required."
+---
+
+The website widget is a floating chat bubble that appears on your site. Users click it to open a full chat interface powered by your agent — no third-party dependencies, no build pipeline, and no framework integration needed.
+
+## Add the widget to your site
+
+<Steps>
+  <Step title="Open the embed settings">
+    In your project dashboard, navigate to **Deploy → Website Widget**.
+  </Step>
+  <Step title="Copy the embed script">
+    Copy the script tag shown on the page. It will look like this:
+
+    ```html
+    <script
+      src="https://widget.canelleai.com/loader.js"
+      data-project-id="YOUR_PROJECT_ID"
+      async
+    ></script>
+    ```
+  </Step>
+  <Step title="Paste the script into your HTML">
+    Add the script tag inside your page's `<head>` element, or just before the closing `</body>` tag. Either position works — the widget initializes after the page has loaded.
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <!-- existing head content -->
+        <script
+          src="https://widget.canelleai.com/loader.js"
+          data-project-id="YOUR_PROJECT_ID"
+          async
+        ></script>
+      </head>
+      <body>
+        <!-- your page content -->
+      </body>
+    </html>
+    ```
+  </Step>
+  <Step title="Verify the widget appears">
+    Load any page that includes the script. The floating chat bubble appears in the corner of the screen. Click it to open the full chat interface and send a test message.
+  </Step>
+</Steps>
+
+<Note>
+  The embed script loads asynchronously and will not affect your page's load performance.
+</Note>
+
+## Position and trigger options
+
+Back in the **Deploy → Website Widget** tab, you can configure how and when the widget appears without touching your code:
+
+<CardGroup cols={3}>
+  <Card title="Position" icon="arrows-up-down-left-right">
+    Place the widget in the **bottom-right** (default) or **bottom-left** corner of the screen.
+  </Card>
+  <Card title="Auto-open delay" icon="clock">
+    Automatically open the chat after **N seconds** on page load. Set to `0` to require a manual click.
+  </Card>
+  <Card title="Button color" icon="palette">
+    The button uses your **primary brand color** by default. Override it with any hex value in the appearance settings.
+  </Card>
+</CardGroup>
+
+## Show the widget on specific pages only
+
+By default, the widget appears on every page that includes the script tag. If you want to show or hide it based on the current URL, use the `CanelleAI` JavaScript API after the script has loaded:
+
+```javascript
+// Show only on support pages
+if (window.location.pathname.startsWith('/support')) {
+  window.CanelleAI.show();
+} else {
+  window.CanelleAI.hide();
+}
+```
+
+You can call `window.CanelleAI.show()` and `window.CanelleAI.hide()` anywhere in your own JavaScript — for example, in response to a button click or a route change in a single-page application.
+
+<Accordion title="Using the widget in a single-page application (SPA)">
+  In React, Vue, Angular, or any SPA framework, call `window.CanelleAI.show()` and `window.CanelleAI.hide()` inside your router's navigation hooks to control visibility as the user moves between views.
+
+  ```javascript
+  // React Router example
+  import { useEffect } from 'react';
+  import { useLocation } from 'react-router-dom';
+
+  function WidgetController() {
+    const location = useLocation();
+
+    useEffect(() => {
+      if (location.pathname.startsWith('/support')) {
+        window.CanelleAI?.show();
+      } else {
+        window.CanelleAI?.hide();
+      }
+    }, [location.pathname]);
+
+    return null;
+  }
+  ```
+</Accordion>
+
+<Tip>
+  You can customize the widget's colors and avatar in **Agent → Appearance** before embedding. Changes apply everywhere the widget is deployed — no script update required.
+</Tip>

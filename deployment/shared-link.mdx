@@ -1,0 +1,78 @@
+---
+title: "Share Your Agent with a Direct Public Link"
+sidebarTitle: "Shared Link"
+description: "Get a shareable URL for your Canelle AI agent — no embed needed. Perfect for sharing with internal teams or linking from email and documentation."
+---
+
+A shared link gives your agent its own standalone URL. Anyone with the link can chat with your agent in a full-page interface — no website embed required. This makes it ideal for internal team rollouts, beta testing, support handoffs, or any situation where you need a ready-to-share destination.
+
+## Get your shared link
+
+<Steps>
+  <Step title="Open the Shared Link settings">
+    In your project dashboard, navigate to **Deploy → Shared Link**.
+  </Step>
+  <Step title="Copy the link">
+    Your shared link is generated automatically. It looks like this:
+
+    ```
+    https://chat.canelleai.com/s/your-project-slug
+    ```
+
+    Click **Copy Link** to copy it to your clipboard.
+  </Step>
+  <Step title="Share it anywhere">
+    Paste the link into an email, internal documentation page, Slack message, Notion wiki, or wherever your audience will find it. No installation or setup is needed on their end.
+  </Step>
+</Steps>
+
+## Link privacy
+
+Choose how much access control you need for your shared link:
+
+<Tabs>
+  <Tab title="Public (default)">
+    Anyone who has the link can open your agent and start chatting immediately. No account or login is required on their part.
+
+    Use this option for public-facing agents, open support assistants, or situations where friction-free access is the priority.
+  </Tab>
+  <Tab title="Password protected">
+    Users must enter a password before they can access the chat interface. Set or change the password at any time in **Deploy → Shared Link → Password**.
+
+    Use this option for internal team agents, beta testers, or any scenario where you want to limit access without managing individual user accounts.
+
+    <Warning>
+      Changing the password immediately invalidates the previous one. Make sure everyone who needs access has the new password before you update it.
+    </Warning>
+  </Tab>
+</Tabs>
+
+## Customize your link URL
+
+<Accordion title="Custom slug — Professional and Ultimate plans">
+  By default, the slug (the part of the URL after `/s/`) is generated from your project name. On **Professional** and **Ultimate** plans, you can change it to something more memorable or brand-aligned.
+
+  1. Go to **Deploy → Shared Link → Custom Slug**.
+  2. Enter your preferred slug — for example, `acme-support`.
+  3. Click **Save**. Your link is now available at:
+
+  ```
+  https://chat.canelleai.com/s/acme-support
+  ```
+
+  The old URL stops working immediately after you save a new slug, so update any existing links that point to the previous address.
+</Accordion>
+
+<Accordion title="Custom domain — Ultimate plan">
+  On the **Ultimate** plan, you can serve your shared link from your own domain — for example, `https://assistant.yourcompany.com`. This gives users a fully branded experience with no Canelle AI branding in the URL.
+
+  To configure a custom domain, [contact support](mailto:support@canelleai.com) with your desired hostname. Our team will provide the DNS records you need to add to your domain registrar.
+</Accordion>
+
+<Tip>
+  The shared link is a great way to let internal teams test the agent before you embed it on your public site. Share it with a handful of colleagues to collect feedback, then deploy the widget when you're confident the agent is ready.
+</Tip>
+
+<Note>
+  The shared link and website widget both use the same underlying agent. Changes to knowledge or settings are reflected immediately in both — you never need to re-copy or re-share the link after updating your content.
+</Note>

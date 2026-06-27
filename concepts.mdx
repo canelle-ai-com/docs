@@ -1,0 +1,108 @@
+---
+title: "Key Concepts: Projects, Agents, Knowledge, and Credits"
+sidebarTitle: "Concepts"
+description: "Understand Canelle AI's core building blocks: projects, knowledge bases, AI agents, deployment channels, AI credits, and how they work together."
+---
+
+Before you dive into building, it helps to understand the core building blocks of Canelle AI and how they fit together. This page explains each concept in plain language so you can make confident decisions as you set up your projects and agents.
+
+## Core Concepts
+
+<Accordion title="Projects">
+  A **project** is your top-level container in Canelle AI. Everything lives inside a project — your knowledge base, your AI agent configuration, and all of your deployment settings.
+
+  Think of a project as a single, self-contained assistant. Because each project has its own isolated knowledge base, you can run multiple projects in parallel without them ever sharing or mixing content.
+
+  **Common patterns:**
+  - One project for **customer-facing support**, trained on your product documentation and help articles
+  - One project for **internal HR**, trained on your employee handbook and policies
+  - One project for **engineering onboarding**, trained on your runbooks and architecture docs
+
+  You can create as many projects as your plan allows, and switch between them freely from your dashboard.
+</Accordion>
+
+<Accordion title="Knowledge Base">
+  The **knowledge base** is the collection of indexed content your agent draws on when answering questions. It's the foundation of everything — the quality and completeness of your knowledge base directly determines how useful your agent is.
+
+  When you add a source (a PDF, a URL, a Notion page, plain text, and so on), Canelle AI runs it through a processing pipeline:
+
+  1. **Parse** — extracts the raw text from the source format
+  2. **Chunk** — splits the content into smaller, semantically meaningful segments
+  3. **Embed** — converts each chunk into a vector representation that captures its meaning
+  4. **Store** — saves the vectors in a database optimized for fast semantic search
+
+  When a user asks a question, Canelle AI searches these vectors to find the chunks most relevant to the query, then uses them to compose a response.
+
+  <Tip>
+    Keeping your knowledge base up to date is just as important as building it. Re-index sources whenever your underlying content changes so your agent always reflects the latest information.
+  </Tip>
+</Accordion>
+
+<Accordion title="AI Agent">
+  The **AI agent** is the conversational interface that sits on top of your knowledge base. It receives a user's question, searches the knowledge base for relevant content, and generates a clear, accurate response.
+
+  A critical property of Canelle AI agents is their strict grounding: the agent **only** uses content you've indexed. It never reaches out to the open web, and it never draws on the general knowledge baked into its underlying model. If the answer to a question isn't in your knowledge base, the agent says so rather than guessing.
+
+  Each project has exactly one agent. You configure the agent's name, welcome message, and response language from the **Agent** tab of your project.
+
+  <Note>
+    Source references are included with every response so users can verify exactly where an answer came from.
+  </Note>
+</Accordion>
+
+<Accordion title="Deployment Channels">
+  A **deployment channel** is the surface through which users interact with your agent. Canelle AI supports four channels, and you can enable as many as you need simultaneously from the **Deploy** tab.
+
+  | Channel | Best For |
+  |---|---|
+  | **Website Widget** | Embedding a chat bubble directly on your site via a JavaScript snippet |
+  | **Shared Link** | Sending a standalone public chat URL to users without any code integration |
+  | **Slack** | Letting team members query your agent with slash commands inside Slack workspaces |
+  | **REST API** | Integrating agent responses into your own app, portal, or backend workflow |
+
+  All four channels connect to the same knowledge base, so your agent is consistent regardless of where someone asks their question.
+</Accordion>
+
+<Accordion title="AI Credits">
+  **AI credits** are the unit of consumption in Canelle AI. Every time a user sends a message and your agent generates a response, one credit is consumed. Credits do not roll over between billing cycles.
+
+  - New projects start with **30 free credits** to use during your trial
+  - Your remaining credit balance is always visible under **Settings > Billing**
+  - When your credits are exhausted, the agent stops responding to new messages until your credits renew at the start of your next billing cycle or you upgrade to a higher plan
+
+  <Warning>
+    If your agent goes silent unexpectedly, check your credit balance first. Depleted credits are the most common cause of an unresponsive agent.
+  </Warning>
+
+  Credit allocations vary by plan. Review the [Pricing](https://canelleai.com/pricing) page to find the plan that matches your expected message volume.
+</Accordion>
+
+<Accordion title="RAG (Retrieval-Augmented Generation)">
+  **RAG** — Retrieval-Augmented Generation — is the underlying technology that makes Canelle AI's grounded answers possible. Understanding it at a high level helps you get more out of the platform.
+
+  Here's what happens every time a user asks your agent a question:
+
+  <Steps>
+    <Step title="Query Conversion">
+      Canelle AI converts the user's natural-language question into a vector embedding — a mathematical representation of its meaning.
+    </Step>
+    <Step title="Semantic Retrieval">
+      The system searches your knowledge base for the chunks whose embeddings are most semantically similar to the query embedding. This finds relevant content even when the user's wording doesn't exactly match the source text.
+    </Step>
+    <Step title="Context Assembly">
+      The top-matching chunks are assembled into a context window and passed to the AI model alongside the original question.
+    </Step>
+    <Step title="Answer Generation">
+      The AI model reads the retrieved context and generates a response. Because the model is explicitly instructed to answer only from the provided context, it cannot fabricate information that isn't there.
+    </Step>
+    <Step title="Source Attribution">
+      The response is returned to the user along with references to the specific source documents or pages the answer was drawn from.
+    </Step>
+  </Steps>
+
+  The practical outcome is an assistant that feels as natural as any AI chat interface but behaves with the precision and trustworthiness of a search engine scoped to your own content.
+</Accordion>
+
+<Note>
+  You can view your remaining AI credits at any time from **Settings > Billing**.
+</Note>

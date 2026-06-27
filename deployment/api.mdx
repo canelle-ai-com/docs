@@ -1,0 +1,143 @@
+---
+title: "Deploy via API: Integrate Canelle AI Anywhere"
+sidebarTitle: "API Deployment"
+description: "Use the Canelle AI REST API to build custom chat UIs, pipe agent responses into your own workflows, or integrate with any application."
+---
+
+The REST API gives you full programmatic access to your agent. Use it to build custom chat interfaces, integrate answers into your application logic, trigger agent queries from backend services, or automate workflows that act on your agent's responses — all without using the managed widget or shared link.
+
+## Before you start
+
+You'll need an API key to authenticate every request. Generate one and learn how to pass it securely in the [Authentication guide](/api-reference/authentication).
+
+<Note>
+  Keep your API key secret. Never expose it in client-side JavaScript, public repositories, or anywhere outside a secure server environment.
+</Note>
+
+## Make your first API call
+
+Send a `POST` request to the `/v1/chat` endpoint with your project ID and the user's message:
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.canelleai.com/v1/chat \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "YOUR_PROJECT_ID",
+    "message": "What is your refund policy?"
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.canelleai.com/v1/chat",
+    headers={
+        "Authorization": "Bearer YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "project_id": "YOUR_PROJECT_ID",
+        "message": "What is your refund policy?",
+    },
+)
+
+data = response.json()
+print(data["answer"])
+```
+
+```javascript Node.js
+const response = await fetch("https://api.canelleai.com/v1/chat", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    project_id: "YOUR_PROJECT_ID",
+    message: "What is your refund policy?",
+  }),
+});
+
+const data = await response.json();
+console.log(data.answer);
+```
+</CodeGroup>
+
+### Example response
+
+```json
+{
+  "id": "msg_01HX9Z2K3M",
+  "answer": "Our refund policy allows returns within 30 days of purchase. To request a refund, email billing@yourcompany.com with your order number.",
+  "sources": [
+    {
+      "title": "Refund Policy",
+      "url": "https://yourcompany.com/refund-policy"
+    }
+  ],
+  "credits_used": 1,
+  "credits_remaining": 4842
+}
+```
+
+The `sources` array lists the knowledge base documents the agent drew from to generate the answer — useful for building citation UI or for auditing the agent's reasoning.
+
+## Maintain conversation context
+
+Each call to `/v1/chat` is stateless by default. To carry context across multiple turns — so the agent remembers what was said earlier in the same conversation — pass the `conversation_id` returned from the previous response:
+
+<Steps>
+  <Step title="Send the first message">
+    Make a standard `/v1/chat` request. The response includes a `conversation_id`.
+
+    ```json
+    {
+      "id": "msg_01HX9Z2K3M",
+      "conversation_id": "conv_01HX9Z2K3M",
+      "answer": "Our refund policy allows returns within 30 days of purchase..."
+    }
+    ```
+  </Step>
+  <Step title="Pass the conversation_id in follow-up messages">
+    Include the `conversation_id` field in subsequent requests to continue the same thread:
+
+    ```bash
+    curl -X POST https://api.canelleai.com/v1/chat \
+      -H "Authorization: Bearer YOUR_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "project_id": "YOUR_PROJECT_ID",
+        "conversation_id": "conv_01HX9Z2K3M",
+        "message": "What about exchanges?"
+      }'
+    ```
+
+    The agent treats the new message as a continuation of the earlier conversation and takes prior context into account when generating its answer.
+  </Step>
+</Steps>
+
+<Tip>
+  See the full API reference at [/api-reference/overview](/api-reference/overview) for all available endpoints, including document management, conversation history retrieval, and project configuration.
+</Tip>
+
+## Explore the API reference
+
+<CardGroup cols={2}>
+  <Card
+    title="API Overview"
+    icon="book-open"
+    href="/api-reference/overview"
+  >
+    Explore all available endpoints, request schemas, response formats, and rate limit details.
+  </Card>
+  <Card
+    title="Chat Endpoint"
+    icon="message-bot"
+    href="/api-reference/chat"
+  >
+    Full reference for the `/v1/chat` endpoint — parameters, response fields, error codes, and streaming support.
+  </Card>
+</CardGroup>
